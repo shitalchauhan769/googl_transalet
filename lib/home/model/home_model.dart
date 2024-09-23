@@ -1,22 +1,22 @@
 class TranslateModel
 {
-  String? source,target,text;
+  String? source,target,text,translation;
 
-  TranslateModel({this.source, this.target, this.text});
+  TranslateModel({this.source, this.target, this.text,this.translation});
 
-  factory TranslateModel.mapTOModel(Map m1)
+  factory TranslateModel.mapToModel(Map m1)
   {
-    return TranslateModel(text: m1['text'],source: m1['source'],target: m1['target']);
+    return TranslateModel(text: m1['text'],source: m1['source'],target: m1['target'],translation: m1["translation"]);
   }
 }
 
-class DetailsModel
-{
-  String? details;
-
-  DetailsModel({this.details});
-}
-
+// class DetailsModel
+// {
+//   String? details;
+//
+//   DetailsModel({this.details});
+// }
+//
 
 class LangModel{
   String? lang,s1;

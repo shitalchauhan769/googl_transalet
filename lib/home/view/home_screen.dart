@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_translate/home/controller/home_controller.dart';
+import 'package:google_translate/home/model/home_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -104,117 +105,113 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body: SingleChildScrollView(
-          child: FutureBuilder(
-            future: controller.model,
-            builder: (context, snapshot) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Obx(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Obx(
                       () => Row(
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              showSource();
-                            },
-                            child: const Text("DetectLanguage"),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              showSource();
-                            },
-                            child: Text(controller.lanIndex.value),
-                          ),
-                          Column(
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  showSource();
-                                },
-                                icon: const Icon(Icons.keyboard_arrow_down),
-                              ),
-                            ],
-                          )
-                        ],
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          showSource();
+                        },
+                        child: const Text("DetectLanguage"),
                       ),
-                    ),
-                    SizedBox(
-                      height: 300,
-                      width: MediaQuery.sizeOf(context).width,
-                      child: Card(
-                        child: Container(
-                          height: 100,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextFormField(
-                              controller: txtText,
-                              decoration: const InputDecoration(
-                                  border: InputBorder.none),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Please enter data";
-                                }
-                                return null;
-                              },
-                            ),
+                      TextButton(
+                        onPressed: () {
+                          showSource();
+                        },
+                        child: Text(controller.lanIndex.value),
+                      ),
+                      Column(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              showSource();
+                            },
+                            icon: const Icon(Icons.keyboard_arrow_down),
                           ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 300,
+                  width: MediaQuery.sizeOf(context).width,
+                  child: Card(
+                    child: Container(
+                      height: 100,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: txtText,
+                          decoration: const InputDecoration(
+                              border: InputBorder.none),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please enter data";
+                            }
+                            return null;
+                          },
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          controller.getTranslate(
-                              txtText: txtText.text,
-                              source: controller.lanIndex.value,
-                              target: controller.index.value);
-                          // txtText.clear();
-                        }
-                      },
-                      child: const Text("Translate"),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Obx(
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      controller.getTranslate(
+                          txtText: txtText.text,
+                          source: controller.lanIndex.value,
+                          target: controller.index.value
+                      );
+                      // txtText.clear();
+                    }
+                  },
+                  child: const Text("Translate"),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Obx(
                       () => Row(
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          showTarget();
+                        },
+                        child: Text(controller.index.value),
+                      ),
+                      Column(
                         children: [
-                          TextButton(
+                          IconButton(
                             onPressed: () {
                               showTarget();
                             },
-                            child: Text(controller.index.value),
-                          ),
-                          Column(
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  showTarget();
-                                },
-                                icon: const Icon(Icons.keyboard_arrow_down),
-                              ),
-                            ],
+                            icon: const Icon(Icons.keyboard_arrow_down),
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 300,
-                      width: MediaQuery.sizeOf(context).width,
-                      child: Card(
-                        child: SelectableText("${controller.model}"),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              );
-            },
-          ),
+                SizedBox(
+                  height: 300,
+                  width: MediaQuery.sizeOf(context).width,
+                  child: Card(
+                    child: SelectableText("${controller.model!.text}"),
+                  ),
+                ),
+              ],
+            ),
+          )
         ),
       ),
     );
