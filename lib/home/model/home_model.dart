@@ -1,24 +1,54 @@
-class TranslateModel
-{
-  String? source,target,text,translation;
+class TranslateModel {
+  Translations? translations;
 
-  TranslateModel({this.source, this.target, this.text,this.translation});
+  TranslateModel({this.translations});
 
-  factory TranslateModel.mapToModel(Map m1)
-  {
-    return TranslateModel(text: m1['text'],source: m1['source'],target: m1['target'],translation: m1["translation"]);
+  TranslateModel.fromJson(Map<String, dynamic> json) {
+    translations = json['translations'] != null ? new Translations.fromJson(json['translations']) : null;
+
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.translations != null) {
+      data['translations'] = this.translations!.toJson();
+    }
+
+    return data;
   }
 }
 
-// class DetailsModel
-// {
-//   String? details;
-//
-//   DetailsModel({this.details});
-// }
-//
+class Translations {
+  String? text;
+  String? translation;
+  String? source;
+  String? target;
 
-class LangModel{
+  Translations({this.text, this.translation, this.source, this.target});
+
+  Translations.fromJson(Map<String, dynamic> json) {
+    text = json['text'];
+    translation = json['translation'];
+    source = json['source'];
+    target = json['target'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['text'] = this.text;
+    data['translation'] = this.translation;
+    data['source'] = this.source;
+    data['target'] = this.target;
+    return data;
+  }
+}
+
+
+
+
+
+
+class LangModel {
   String? lang,s1;
 
   LangModel({this.lang, this.s1});

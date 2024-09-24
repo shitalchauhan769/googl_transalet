@@ -5,10 +5,12 @@ import 'package:google_translate/util/helper/post_api_helper.dart';
 
 class HomeController extends GetxController {
   RxList<LangModel> langList = <LangModel>[].obs;
-  TranslateModel? model;
+  Rxn<TranslateModel> model = Rxn();
   String source = "en", target = "gu", text = "";
   RxString index = "Gujarati".obs;
   RxString lanIndex="English".obs;
+  RxString index1="gu".obs;
+  RxString lanIndex1="en".obs;
 
 
 
@@ -16,9 +18,15 @@ class HomeController extends GetxController {
     langList.value = await JsonAPI.helper.googleTranslateAPI();
   }
 
-  void getTranslate({required String txtText,required String source,required String target,}) async {
+  void getTranslate( String txtText, String source, String target,) async {
 
-    model = await TranslateAPI.helper.translateAPI(source: source, target: target, text: txtText);
+    print("============================text${txtText}");
+    print("============================source${source}");
+    print("============================target${target}");
+    // print(model.value!.target);
+    // print(model.value!.source);
+
+    model.value= await TranslateAPI.helper.translateAPI(source,target,txtText);
 
   }
 

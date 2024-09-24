@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_translate/home/controller/home_controller.dart';
-import 'package:google_translate/home/model/home_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -105,114 +103,120 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Obx(
-                      () => Row(
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          showSource();
-                        },
-                        child: const Text("DetectLanguage"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          showSource();
-                        },
-                        child: Text(controller.lanIndex.value),
-                      ),
-                      Column(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              showSource();
-                            },
-                            icon: const Icon(Icons.keyboard_arrow_down),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 300,
-                  width: MediaQuery.sizeOf(context).width,
-                  child: Card(
-                    child: Container(
-                      height: 100,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          controller: txtText,
-                          decoration: const InputDecoration(
-                              border: InputBorder.none),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please enter data";
-                            }
-                            return null;
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Obx(
+                () => Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        showSource();
+                      },
+                      child: const Text("DetectLanguage"),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        showSource();
+                      },
+                      child: Text(controller.lanIndex.value),
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            showSource();
                           },
+                          icon: const Icon(Icons.keyboard_arrow_down),
                         ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 300,
+                width: MediaQuery.sizeOf(context).width,
+                child: Card(
+                  child: Container(
+                    height: 100,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: txtText,
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please enter data";
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    controller.getTranslate(txtText.text,
+                        controller.lanIndex1.value, controller.index1.value);
+
+                    // txtText.clear();
+                  }
+                },
+                child: const Text("Translate"),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Obx(
+                () =>  Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        showTarget();
+                      },
+                      child: Text(controller.index.value),
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            showTarget();
+                          },
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                TextButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      controller.getTranslate(
-                          txtText: txtText.text,
-                          source: controller.lanIndex.value,
-                          target: controller.index.value
-                      );
-                      // txtText.clear();
-                    }
-                  },
-                  child: const Text("Translate"),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Obx(
-                      () => Row(
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          showTarget();
-                        },
-                        child: Text(controller.index.value),
+              ),
+              SizedBox(
+                height: 300,
+                width: MediaQuery.sizeOf(context).width,
+                child: Obx(
+                  () => Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: SelectableText(
+                        controller.model.value != null
+                            ? "${controller.model.value!.translations!.translation}"
+                            : "",
                       ),
-                      Column(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              showTarget();
-                            },
-                            icon: const Icon(Icons.keyboard_arrow_down),
-                          ),
-                        ],
-                      ),
-                    ],
+                    ),
+                    // child: Text(controller.model.value!=null?"${controller.model.value!.text }":""),
                   ),
                 ),
-                SizedBox(
-                  height: 300,
-                  width: MediaQuery.sizeOf(context).width,
-                  child: Card(
-                    child: SelectableText("${controller.model!.text}"),
-                  ),
-                ),
-              ],
-            ),
-          )
-        ),
+              ),
+            ],
+          ),
+        )),
       ),
     );
   }
@@ -249,6 +253,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onTap: () {
                                   controller.lanIndex.value =
                                       controller.langList[index].lang!;
+                                  controller.lanIndex1.value=controller.langList[index].s1!;
+
                                   Get.back();
                                 },
                                 child:
@@ -299,8 +305,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     onTap: () {
                                       controller.index.value =
                                           controller.langList[index].lang!;
-                                      print(
-                                          "================================ language${controller.index.value}");
+                                      controller.index1.value=controller.langList[index].s1!;
+
                                       Get.back();
                                     },
                                     child: Text(
