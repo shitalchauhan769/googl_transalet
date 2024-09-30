@@ -120,7 +120,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPressed: () {
                         showSource();
                       },
-                      child: Text(controller.lanIndex.value),
+                      child: Row(
+                        children: [
+                          Text(controller.lanIndex.value),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
+                            width: 25,
+                            height: 25,
+                            child: Image(
+                              image: NetworkImage(controller.imageIndex1.value),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Column(
                       children: [
@@ -176,13 +190,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 20,
               ),
               Obx(
-                () =>  Row(
+                () => Row(
                   children: [
                     TextButton(
                       onPressed: () {
                         showTarget();
                       },
-                      child: Text(controller.index.value),
+                      child: Row(
+                        children: [
+                          Text(controller.index.value),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
+                            width: 25,
+                            height: 25,
+                            child: Image(
+                              image: NetworkImage(controller.imageIndex.value),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Column(
                       children: [
@@ -253,12 +281,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onTap: () {
                                   controller.lanIndex.value =
                                       controller.langList[index].lang!;
-                                  controller.lanIndex1.value=controller.langList[index].s1!;
+                                  controller.lanIndex1.value =
+                                      controller.langList[index].s1!;
+                                  controller.imageIndex1.value =
+                                      controller.langList[index].image!;
 
                                   Get.back();
                                 },
-                                child:
+                                child: Row(
+                                  children: [
                                     Text("${controller.langList[index].lang}"),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                    SizedBox(
+                                      height: 30,
+                                      width: 30,
+                                      child: Image(
+                                        image: NetworkImage(
+                                            "${controller.langList[index].image}"),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -292,7 +337,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Container(
                           width: MediaQuery.sizeOf(context).width,
-                          margin: const EdgeInsets.all(3),
                           decoration: const BoxDecoration(),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -305,12 +349,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                     onTap: () {
                                       controller.index.value =
                                           controller.langList[index].lang!;
-                                      controller.index1.value=controller.langList[index].s1!;
+                                      controller.index1.value =
+                                          controller.langList[index].s1!;
+                                      controller.imageIndex.value =
+                                          controller.langList[index].image!;
 
                                       Get.back();
                                     },
-                                    child: Text(
-                                        "${controller.langList[index].lang}"),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                            "${controller.langList[index].lang}"),
+                                        const SizedBox(
+                                          width: 20,
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                          width: 30,
+                                          child: Image(
+                                            image: NetworkImage(
+                                                "${controller.langList[index].image}"),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

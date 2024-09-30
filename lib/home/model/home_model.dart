@@ -49,11 +49,11 @@ class Translations {
 
 
 class LangModel {
-  String? lang,s1;
+  String? lang,s1,image;
 
-  LangModel({this.lang, this.s1});
+  LangModel({this.lang, this.s1,this.image});
   factory LangModel.mapToModel(Map m1)
   {
-    return LangModel(lang: m1["lang"],s1: m1["1"]);
+    return LangModel(lang: m1["lang"],s1: m1["1"],image: m1['image']);
   }
 }

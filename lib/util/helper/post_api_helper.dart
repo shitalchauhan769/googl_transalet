@@ -23,7 +23,7 @@ class TranslateAPI {
     // print("=======================response1  ${response.statusCode}");
 
     if (response.statusCode == 200) {
-      var json = jsonDecode(response.body);
+      var json = jsonDecode(utf8.decode(response.bodyBytes));
       // print("========================== json ${json}");
       TranslateModel m1 = TranslateModel.fromJson(json);
       // print("========================= model ${m1.translations!.translation}");
