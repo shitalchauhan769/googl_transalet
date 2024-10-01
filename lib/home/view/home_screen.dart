@@ -262,51 +262,48 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisCount: 3),
                   itemCount: controller.langList.length,
                   itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        // controller.getSourceLanguage(s1: controller.langList[index].s1!, lan: controller.langList[index].lang!);
-                        print(controller.langList[index].lang);
-                      },
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width,
-                        margin: const EdgeInsets.all(3),
-                        decoration: const BoxDecoration(),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: InkWell(
-                                onTap: () {
-                                  controller.lanIndex.value =
-                                      controller.langList[index].lang!;
-                                  controller.lanIndex1.value =
-                                      controller.langList[index].s1!;
-                                  controller.imageIndex1.value =
-                                      controller.langList[index].image!;
+                    return Center(
+                      child: Card(
+                        child: SizedBox(
+                          width: MediaQuery.sizeOf(context).width,
+                          height: 100,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: InkWell(
+                                  onTap: () {
+                                    controller.lanIndex.value =
+                                        controller.langList[index].lang!;
+                                    controller.lanIndex1.value =
+                                        controller.langList[index].s1!;
+                                    controller.imageIndex1.value =
+                                        controller.langList[index].image!;
 
-                                  Get.back();
-                                },
-                                child: Row(
-                                  children: [
-                                    Text("${controller.langList[index].lang}"),
-                                    const SizedBox(
-                                      width: 20,
-                                    ),
-                                    SizedBox(
-                                      height: 30,
-                                      width: 30,
-                                      child: Image(
-                                        image: NetworkImage(
-                                            "${controller.langList[index].image}"),
+                                    Get.back();
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text("${controller.langList[index].lang}"),
+                                      const SizedBox(
+                                        width: 10,
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(
+                                        height: 25,
+                                        width: 25,
+                                        child: Image(
+                                          image: NetworkImage(
+                                              "${controller.langList[index].image}"),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -335,48 +332,53 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        Container(
-                          width: MediaQuery.sizeOf(context).width,
-                          decoration: const BoxDecoration(),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Obx(
-                                  () => InkWell(
-                                    onTap: () {
-                                      controller.index.value =
-                                          controller.langList[index].lang!;
-                                      controller.index1.value =
-                                          controller.langList[index].s1!;
-                                      controller.imageIndex.value =
-                                          controller.langList[index].image!;
+                        Center(
+                          child: Card(
+                            child: Container(
+                              width: MediaQuery.sizeOf(context).width,
+                              height: 100,
+                              decoration: const BoxDecoration(),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Obx(
+                                      () => InkWell(
+                                        onTap: () {
+                                          controller.index.value =
+                                              controller.langList[index].lang!;
+                                          controller.index1.value =
+                                              controller.langList[index].s1!;
+                                          controller.imageIndex.value =
+                                              controller.langList[index].image!;
 
-                                      Get.back();
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                            "${controller.langList[index].lang}"),
-                                        const SizedBox(
-                                          width: 20,
+                                          Get.back();
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                                "${controller.langList[index].lang}"),
+                                            const SizedBox(
+                                              width: 20,
+                                            ),
+                                            SizedBox(
+                                              height: 30,
+                                              width: 30,
+                                              child: Image(
+                                                image: NetworkImage(
+                                                    "${controller.langList[index].image}"),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(
-                                          height: 30,
-                                          width: 30,
-                                          child: Image(
-                                            image: NetworkImage(
-                                                "${controller.langList[index].image}"),
-                                          ),
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ],
